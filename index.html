@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Broadband ISP Homepage Sections</title>
+    <!-- Font: Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+      :root {
+        --stk-primary-red: #e30613;
+        --stk-navy: #0b0f2b;
+        --stk-deep-blue: #050c2f;
+        --stk-light-bg: #f4f4f6;
+        --stk-text-gray: #6b7280;
+        --stk-soft-pink: #fde8ea;
+        --stk-white: #ffffff;
+        --container-max-width: 1200px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      html,
+      body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+      }
+
+      .container {
+        max-width: var(--container-max-width);
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+      }
+
+      /* --- GLOBAL BUTTON STYLE --- */
+      .stk-btn {
+        background: var(--stk-primary-red);
+        color: white;
+        padding: 14px 30px;
+        border-radius: 6px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.4s;
+      }
+
+      .stk-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: var(--stk-navy);
+        transition: 0.4s;
+        z-index: -1;
+      }
+
+      .stk-btn:hover::before {
+        width: 100%;
+      }
+
+      /* --- SECTION 1: 6G BANNER --- */
+      .section-6g {
+        background: linear-gradient(
+          90deg,
+          var(--stk-deep-blue),
+          var(--stk-navy)
+        );
+        padding: 100px 0;
+        color: white;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .grid-6g {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        min-height: 520px;
+        gap: 40px;
+      }
+
+      .visual-side {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      .bg-6g-text {
+        position: absolute;
+        left: -80px;
+        top: 40px;
+        opacity: 0.1;
+        width: 350px;
+        pointer-events: none;
+      }
+
+      .bg-streaks {
+        position: absolute;
+        top: -60px;
+        left: -40px;
+        width: 520px;
+        max-width: none;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .rocket-img {
+        width: 420px;
+        max-width: 100%;
+        height: auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .content-side {
+        z-index: 2;
+        position: relative;
+      }
+
+      .label-pill {
+        background: var(--stk-primary-red);
+        color: white;
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+        display: inline-block;
+        font-weight: 600;
+      }
+
+      .heading-6g {
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 1.2;
+        max-width: 520px;
+      }
+
+      .heading-6g span {
+        color: var(--stk-primary-red);
+      }
+
+      .desc-6g {
+        max-width: 520px;
+        font-size: 16px;
+        color: #cbd5e1;
+        line-height: 1.7;
+        margin-top: 20px;
+      }
+
+      .btn-margin {
+        margin-top: 28px;
+      }
+
+      /* --- SECTION 2: NETWORK SERVICE --- */
+      .section-network {
+        background: var(--stk-light-bg);
+        padding: 100px 0;
+        overflow: hidden;
+      }
+
+      .grid-network {
+        display: grid;
+        grid-template-columns: 300px 1fr 420px;
+        gap: 40px;
+        align-items: center;
+      }
+
+      /* Left Cards */
+      .cards-column {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .service-card {
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: transform 0.4s;
+        height: 180px;
+        width: 100%;
+      }
+
+      .service-card:hover {
+        transform: scale(1.04);
+      }
+
+      .service-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .service-card .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      }
+
+      .service-card .card-text {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        z-index: 2;
+      }
+
+      .arrow-circle {
+        width: 36px;
+        height: 36px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 14px;
+        right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        transition: transform 0.4s;
+      }
+
+      .service-card:hover .arrow-circle {
+        transform: translateX(4px);
+      }
+
+      .arrow-circle::after {
+        content: "→";
+        color: var(--stk-navy);
+        font-weight: 800;
+      }
+
+      /* Center Content */
+      .center-content {
+        width: 100%;
+      }
+
+      .label-small {
+        font-size: 12px;
+        letter-spacing: 3px;
+        color: var(--stk-primary-red);
+        margin-bottom: 12px;
+        display: block;
+        font-weight: 800;
+      }
+
+      .heading-network {
+        font-size: 40px;
+        font-weight: 800;
+        line-height: 1.3;
+        color: var(--stk-navy);
+        max-width: 520px;
+      }
+
+      .heading-network span {
+        color: var(--stk-primary-red);
+      }
+
+      .desc-network {
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--stk-text-gray);
+        margin-top: 20px;
+        max-width: 520px;
+      }
+
+      .stats-row {
+        display: flex;
+        gap: 40px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+
+      .stat-block .number {
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--stk-navy);
+      }
+
+      .stat-block .number span {
+        color: var(--stk-primary-red);
+      }
+
+      .stat-block .label {
+        font-size: 14px;
+        color: var(--stk-text-gray);
+        font-weight: 600;
+      }
+
+      .devices-row {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .device-pill {
+        border: 1px solid #d1d5db;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        color: var(--stk-navy);
+        font-weight: 600;
+      }
+
+      /* Right Monitor */
+      .monitor-side {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      .monitor-img {
+        width: 100%;
+        max-width: 420px;
+        z-index: 2;
+        height: auto;
+      }
+
+      .rotating-text {
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        max-width: 500px;
+        max-height: 500px;
+        z-index: 1;
+        animation: rotateText 20s linear infinite;
+      }
+
+      @keyframes rotateText {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .contact-footer {
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .icon-box {
+        color: var(--stk-primary-red);
+        flex-shrink: 0;
+      }
+
+      .contact-info .label {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: 800;
+        color: var(--stk-primary-red);
+        text-transform: uppercase;
+      }
+
+      .contact-info .email {
+        font-size: 14px;
+        color: var(--stk-navy);
+        font-weight: 600;
+      }
+
+      /* --- STRICT RESPONSIVE FIXES --- */
+
+      @media (max-width: 1250px) {
+        .grid-network {
+          grid-template-columns: 1fr 1fr;
+        }
+        .monitor-side {
+          grid-column: span 2;
+          margin-top: 60px;
+        }
+        .rotating-text {
+          width: 450px;
+          height: 450px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .section-6g,
+        .section-network {
+          padding: 80px 0;
+        }
+        .grid-6g {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 50px;
+        }
+        .visual-side {
+          order: 1;
+        }
+        .content-side {
+          order: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .bg-6g-text {
+          left: 50%;
+          transform: translateX(-50%);
+          top: -20px;
+        }
+        .bg-streaks {
+          width: 100%;
+          left: 0;
+          top: -30px;
+        }
+        .grid-network {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+        .cards-column {
+          flex-direction: row;
+          gap: 15px;
+          order: 2;
+        }
+        .service-card {
+          margin-bottom: 0;
+        }
+        .center-content {
+          order: 1;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .heading-network,
+        .desc-network {
+          max-width: 100%;
+        }
+        .stats-row,
+        .devices-row,
+        .contact-footer {
+          justify-content: center;
+        }
+        .monitor-side {
+          order: 3;
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section-6g,
+        .section-network {
+          padding: 60px 0;
+        }
+        .heading-6g {
+          font-size: 34px;
+        }
+        .heading-network {
+          font-size: 30px;
+        }
+        .cards-column {
+          flex-direction: column;
+        }
+        .service-card {
+          height: 200px;
+        }
+        .stats-row {
+          gap: 25px;
+          justify-content: center;
+        }
+        .stat-block .number {
+          font-size: 32px;
+        }
+        .rotating-text {
+          width: 320px;
+          height: 320px;
+        }
+        .bg-6g-text {
+          width: 280px;
+          opacity: 0.15;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 15px;
+        }
+        .heading-6g {
+          font-size: 28px;
+        }
+        .heading-network {
+          font-size: 24px;
+        }
+        .stk-btn {
+          width: 100%;
+          padding: 14px 20px;
+        }
+        .stats-row {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+        .stat-block {
+          text-align: center;
+        }
+        .device-pill {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+        .bg-6g-text {
+          display: none; /* Prevent clutter on small mobile */
+        }
+        .rotating-text {
+          width: 280px;
+          height: 280px;
+        }
+      }
+
+      /* Prevent potential horizontal scroll from GSAP initial states */
+      .visual-side,
+      .monitor-side,
+      .cards-column {
+        overflow: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SECTION 1: 6G INTERNET PROMOTION BANNER -->
+    <section class="section-6g">
+      <div class="container">
+        <div class="grid-6g">
+          <!-- Left Visual -->
+          <div class="visual-side">
+            <img
+              src="https://placehold.co/400x400/transparent/ffffff?text=6G"
+              alt="6G Text"
+              class="bg-6g-text"
+              id="bg6g"
+            />
+            <img
+              src="https://placehold.co/600x400/transparent/3b82f6?text=Streaks"
+              alt="Light Streaks"
+              class="bg-streaks"
+            />
+            <img
+              src="https://png.pngtree.com/png-vector/20230304/ourmid/pngtree-3d-rocket-launcher-icon-png-image_6630453.png"
+              alt="Rocket"
+              class="rocket-img"
+              id="rocket"
+            />
+          </div>
+          <!-- Right Content -->
+          <div class="content-side">
+            <span class="label-pill animate-text">INTERNET</span>
+            <h1 class="heading-6g animate-text">
+              Try New <span>6G</span> SpeedInternet Connection
+            </h1>
+            <p class="desc-6g animate-text">
+              Donec ex justo, dapibus non faucibus vitae, aliquet con ant.
+              Pellentesque in sodales lectus. Class aptent taciti sociosqu ad
+              litora inceptos himenaeos.
+            </p>
+            <a href="#" class="stk-btn btn-margin animate-text"
+              >VIEW MORE &nbsp; →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: NETWORK SERVICE / FEATURES -->
+    <section class="section-network">
+      <div class="container">
+        <div class="grid-network">
+          <!-- Left Column: Image Cards -->
+          <div class="cards-column">
+            <div class="service-card">
+              <img
+                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=400"
+                alt="Super Fast Wi-Fi"
+              />
+              <div class="overlay"></div>
+              <span class="card-text">Super Fast Wi-Fi</span>
+              <div class="arrow-circle"></div>
+            </div>
+            <div class="service-card">
+              <img
+                src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&q=80&w=400"
+                alt="OTT Platforms"
+              />
+              <div class="overlay"></div>
+              <span class="card-text">OTT Platforms</span>
+              <div class="arrow-circle"></div>
+            </div>
+            <div class="service-card">
+              <img
+                src="https://images.unsplash.com/photo-1556740734-7f1a0293114c?auto=format&fit=crop&q=80&w=400"
+                alt="Postpaid Services"
+              />
+              <div class="overlay"></div>
+              <span class="card-text">Postpaid Services</span>
+              <div class="arrow-circle"></div>
+            </div>
+          </div>
+
+          <!-- Center Column: Content -->
+          <div class="center-content">
+            <span class="label-small">WHAT WE DO</span>
+            <h2 class="heading-network">
+              Stay Connected To The Proper Internet <span>Network Service</span>
+            </h2>
+            <p class="desc-network">
+              Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Non
+              tellus orci ac auctor augue mauris. Elementum nibh tellus molestie
+              nunc non. Sed vulputate odio ut enim blandit volutpat maecenas
+              volutpat.
+            </p>
+
+            <div class="stats-row">
+              <div class="stat-block">
+                <div class="number">437<span>K</span></div>
+                <div class="label">Online Users</div>
+              </div>
+              <div class="stat-block">
+                <div class="number">895<span>+</span></div>
+                <div class="label">HD Channels</div>
+              </div>
+              <div class="stat-block">
+                <div class="number">36<span>K</span></div>
+                <div class="label">Movies</div>
+              </div>
+            </div>
+
+            <div class="devices-row">
+              <span class="device-pill">HD</span>
+              <span class="device-pill">TV</span>
+              <span class="device-pill">3D</span>
+              <span class="device-pill">16:9</span>
+              <span class="device-pill">SMART</span>
+            </div>
+
+            <a href="#" class="stk-btn btn-margin">Discover More</a>
+
+            <div class="contact-footer">
+              <div class="icon-box">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                  />
+                </svg>
+              </div>
+              <div class="contact-info">
+                <span class="label">MAIL US</span>
+                <span class="email">support@example.com</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Monitor -->
+          <div class="monitor-side">
+            <!-- Rotating Text Decoration -->
+            <svg class="rotating-text" viewBox="0 0 200 200">
+              <path
+                id="circlePath"
+                d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                fill="none"
+              />
+              <text
+                font-size="10"
+                fill="#e30613"
+                font-weight="bold"
+                letter-spacing="3"
+              >
+                <textPath href="#circlePath">
+                  CONNECT NOW • CONNECT NOW • CONNECT NOW •
+                </textPath>
+              </text>
+            </svg>
+            <img
+              src="https://images.unsplash.com/photo-1547119957-630f9c4441d8?auto=format&fit=crop&q=80&w=600"
+              alt="Monitor Interface"
+              class="monitor-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      window.onload = function () {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // SECTION 1 ANIMATIONS
+        gsap.from("#rocket", {
+          y: 120,
+          opacity: 0,
+          duration: 1.5,
+          ease: "power3.out",
+        });
+
+        gsap.from("#bg6g", {
+          x: -50,
+          opacity: 0,
+          duration: 2,
+          delay: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.from(".animate-text", {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+        });
+
+        // SECTION 2 ANIMATIONS (Trigger on Scroll)
+        gsap.from(".service-card", {
+          scrollTrigger: {
+            trigger: ".section-network",
+            start: "top 85%",
+          },
+          x: -30,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.15,
+        });
+
+        gsap.from(".center-content > *", {
+          scrollTrigger: {
+            trigger: ".center-content",
+            start: "top 85%",
+          },
+          y: 30,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.1,
+        });
+
+        gsap.from(".monitor-side", {
+          scrollTrigger: {
+            trigger: ".monitor-side",
+            start: "top 85%",
+          },
+          scale: 0.9,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+        });
+      };
+    </script>
+  </body>
+</html>
